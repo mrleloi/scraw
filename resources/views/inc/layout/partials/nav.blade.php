@@ -13,7 +13,7 @@
                 <h4 class="text-white">FACEBOOK</h4>
                 <ul class="list-unstyled">
                     <li><a href="{{ route('useragent.index') }}" class="text-white">GET USER AGENT</a></li>
-                    <li><a href="{{ route('loginfb.index') }}" class="text-white">LOGIN FACEBOOK</a></li>
+                    <li><a href="{{ route('loginfb.warning') }}" class="text-white">LOGIN FACEBOOK</a></li>
                 </ul>
             </div>
         </div>
