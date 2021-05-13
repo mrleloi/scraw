@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9e4ad16e-13fa-4ad7-bc44-e01bc878d69d" name="WindyGlobal">
+        <fileTransfer rootFolder="/var/www/html/scraw" accessType="SFTP" host="34.122.182.99" port="22" sshConfigId="1554d8ca-4067-4bb0-81cc-f55e8ad90526" sshConfig="rsa-key-web-windyglobal-home@34.122.182.99:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

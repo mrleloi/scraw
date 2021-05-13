@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
+<header>
 @include('inc.layout.partials.head')
 @yield('before-css')
 @include('inc.layout.partials.css')
 @yield('after-css')
-</head>
+</header>
 <body>
 @include('inc.layout.partials.nav')
 

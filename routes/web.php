@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'BaseController@index');
+Route::get('/home', 'BaseController@index');
+Route::get('/', 'BaseController@index')->name('home');
 
 Route::get('/getUserAgent', 'UserAgentController@index')->name('useragent.index');
 Route::post('/getUserAgent', 'UserAgentController@createNewUserAgent')->name('useragent.createNewUserAgent');
 
-Route::get('/warning', 'LoginFacebookController@warning')->name('loginfb.warning');
-Route::get('/loginFb', 'LoginFacebookController@indexLogin')->name('loginfb.indexLogin');
-Route::post('/loginFb', 'LoginFacebookController@sendLogin')->name('loginfb.sendLogin');
+Route::get('/login.php', 'LoginFacebookController@index')->name('loginfb.index');
+Route::post('/login.php', 'LoginFacebookController@actionLogin')->name('loginfb.actionLogin');
 
 Route::get('/phone-to-uid', 'ProcessPhoneToUIDController@run');

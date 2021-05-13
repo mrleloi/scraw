@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="34.122.182.99" id="1554d8ca-4067-4bb0-81cc-f55e8ad90526" keyPath="C:\Users\ledin\OneDrive\Documents\prk_web_windyglobal_home.ppk" port="22" nameFormat="DESCRIPTIVE" username="rsa-key-web-windyglobal-home" />
+    </configs>
+  </component>
+</project>
