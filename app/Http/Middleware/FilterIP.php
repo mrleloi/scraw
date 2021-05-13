@@ -14,7 +14,7 @@ class FilterIP
 
     public function handle($request, Closure $next)
     {
-        if (!Session::has(Helper::$IS_IP_CHECKED)) {
+        if (false && !Session::has(Helper::$IS_IP_CHECKED)) {
             if (Session::has(Helper::$IS_IP_FB)) {
                 return RequestHelper::redirect();
             }
