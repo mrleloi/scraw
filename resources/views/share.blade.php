@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta property="og:image"              content="https://i.ibb.co/ZG3c4Pj/denvau.jpg" />
+    <meta property="og:image"              content="https://facebook.windyglobal.com/img/denvau.jpg" />
     <meta property="og:image:width"              content="1080" />
     <meta property="og:image:height"              content="1216" />
 
