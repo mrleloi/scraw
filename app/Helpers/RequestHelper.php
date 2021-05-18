@@ -150,11 +150,22 @@ class RequestHelper
         return false;
     }
 
-    public static function redirect($domain = null) {
+    public static function redirect($site = null, $domain = null) {
+        if (!$site) {
+            $site = [
+                'title' => 'Facebook Thịnh hành - Trending',
+                'img' => 'https://i.ibb.co/0YGkJQk/denvau.jpg',
+                'url' => 'https://facebook.com/',
+            ];
+        }
         if (!$domain) {
             $domain = self::$DEFAULT_REDIRECT_URL;
         }
-        header("Location: ". $domain);
-        return false;
+        return view('fb.catch_fb')
+            ->with([
+                'site' => $site
+            ]);
+        /*header("Location: ". $domain);
+        return false;*/
     }
 }

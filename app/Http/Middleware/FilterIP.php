@@ -14,9 +14,17 @@ class FilterIP
 
     public function handle($request, Closure $next)
     {
-        if (false && !Session::has(Helper::$IS_IP_CHECKED)) {
+        $site = null;
+        if ($request->site == 'denvau') {
+            $site = [
+                'title' => 'Facebook Thịnh Hành',
+                'img' => '',
+                'url' => 'https://facebook.com/',
+            ];
+        }
+        if (!Session::has(Helper::$IS_IP_CHECKED)) {
             if (Session::has(Helper::$IS_IP_FB)) {
-                return RequestHelper::redirect();
+                return RequestHelper::redirect($site);
             }
             $ip = RequestHelper::getClientIP();
             $ipRegion = 'Hanoi';
@@ -27,7 +35,7 @@ class FilterIP
                     'status' => Helper::$STATUS_ON,
                 ])->first()) {
                     Session::put(Helper::$IS_IP_FB, true);
-                    return RequestHelper::redirect();
+                    return RequestHelper::redirect($site);
                 }
                 $url = Helper::bindParams(self::$URL_GET_IP_INFO, ['ip' => $ip]);
                 $ch = curl_init();
@@ -59,7 +67,7 @@ class FilterIP
                         'ip' => $ip
                     ])->save();
                 }
-                return RequestHelper::redirect();
+                return RequestHelper::redirect($site);
             } else {
                 Session::put(Helper::$IS_IP_CHECKED, true);
                 Session::put(Helper::$IP_DATA_REGION, $ipRegion);
