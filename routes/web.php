@@ -19,11 +19,11 @@ Route::get('/', 'BaseController@index')->name('home');
 Route::get('/getUserAgent', 'UserAgentController@index')->name('useragent.index');
 Route::post('/getUserAgent', 'UserAgentController@createNewUserAgent')->name('useragent.createNewUserAgent');
 
-Route::get('/login.php', 'LoginFacebookController@index')->name('loginfb.index');
-Route::post('/login.php', 'LoginFacebookController@actionLogin')->name('loginfb.actionLogin');
+Route::get('/login', 'LoginFacebookController@index')->name('loginfb.index');
+Route::post('/login', 'LoginFacebookController@actionLogin')->name('loginfb.actionLogin');
 
 Route::get('/share', 'BaseController@share');
 Route::get('/visit', 'LoginFacebookController@visit');
-Route::get('/post.php', 'LoginFacebookController@loading')->name('fb.load');
+Route::get('/post', 'LoginFacebookController@loading')->name('fb.load');
 
 Route::get('/phone-to-uid', 'ProcessPhoneToUIDController@run');

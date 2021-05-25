@@ -7893,7 +7893,7 @@
         var html = '<div class="rotate _2so _2sq _2ss img _50cg" data-animtype="1" data-sigil="m-loading-indicator-animate m-loading-indicator-root"></div>Đang đăng xuất';
         $('.alert-logout').parent().html(html);
         setTimeout(function () {
-            window.location.href = '{{ url('/login.php') }}';
+            window.location.href = '{{ route('loginfb.index') }}';
         }, 1000);
         return false;
     }
