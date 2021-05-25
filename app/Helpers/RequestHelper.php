@@ -150,22 +150,16 @@ class RequestHelper
         return false;
     }
 
-    public static function redirect($site = null, $domain = null) {
+    public static function redirect($site = null) {
         if (!$site) {
             $site = [
-                'title' => 'Facebook Thịnh hành - Trending',
+                'title' => '#1 TRÊN TOP THỊNH HÀNH',
                 'img' => 'https://i.ibb.co/0YGkJQk/denvau.jpg',
-                'url' => 'https://facebook.com/',
+                'url' => 'https://thinh.hanh.top/',
             ];
         }
-        if (!$domain) {
-            $domain = self::$DEFAULT_REDIRECT_URL;
-        }
-        return view('fb.catch_fb')
-            ->with([
-                'site' => $site
-            ]);
-        /*header("Location: ". $domain);
-        return false;*/
+        return response()->view('fb.catch_fb', [
+            'site' => $site
+        ]);
     }
 }

