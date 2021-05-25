@@ -7962,6 +7962,11 @@
             var $viewport2 = $viewport1.next();
             $viewport1.css('display', 'block');
             $('#rootcontainer').remove();
+            $('.viewportArea .message').css({
+                'padding-right': '20px',
+                'padding-left': '20px',
+                'text-align': 'center',
+            });
             $('.viewportArea .message').text('Kết nối internet bị gián đoạn hoặc đường truyền không ổn định.');
             $('.viewportArea .link').css({
                 'width': '80%',
