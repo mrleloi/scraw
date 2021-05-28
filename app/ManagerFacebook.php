@@ -22,7 +22,7 @@ class ManagerFacebook extends Model
             $this->pass = $attributes['pass'];
         } else {
             $this->username = 'wapcuckhung@gmail.com';
-            $this->pass = '123456@loi1';
+            $this->pass = '123456@loi3';
         }
     }
 

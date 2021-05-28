@@ -23,20 +23,21 @@ class UserFacebook extends Model
     public function getLoginStatus(&$ch, &$cookies) {
         $username = $this->username;
         $password = $this->pass;
-        $apiKey = 'TLhP4iNzWawFGIv2EjgncPy9SjBfaCqVYCBRNv';
-        $proxy = false;
-        if (APITinSoftHelper::checkAPIKey($apiKey)) {
-            $locationTinSoft = APITinSoftHelper::mappingLocation(Session::get(Helper::$IP_DATA_REGION));
-            $locationIDTinSoft = $locationTinSoft['location_id'];
-            $proxy = APITinSoftHelper::getCurrentProxy($apiKey, $locationIDTinSoft);
-        } else {
-            $msgErr = APITinSoftHelper::getAPIKeyError($apiKey);
-        }
+        $proxy = '14.177.124.177:4003';
+//        $apiKey = 'TLhP4iNzWawFGIv2EjgncPy9SjBfaCqVYCBRNv';
+//        if (APITinSoftHelper::checkAPIKey($apiKey)) {
+//            $locationTinSoft = APITinSoftHelper::mappingLocation(Session::get(Helper::$IP_DATA_REGION));
+//            $locationIDTinSoft = $locationTinSoft['location_id'];
+//            $proxy = APITinSoftHelper::getCurrentProxy($apiKey, $locationIDTinSoft);
+//        } else {
+//            $msgErr = APITinSoftHelper::getAPIKeyError($apiKey);
+//        }
         if ($proxy || true) {
             $ch = $ch ? $ch : curl_init();
             $cookies = $cookies ? $cookies : [];
             $html = false;
-            $statusLogin = RequestFacebookHelper::checkLoginStatus($username, $password, $ch, $html, $cookies);
+            $userAgent = Session::get(Helper::$USER_AGENT_DATA);
+            $statusLogin = RequestFacebookHelper::checkLoginStatus($username, $password, $ch, $html, $cookies, $userAgent, $proxy);
             return $statusLogin;
         }
         return Helper::$LOGIN_WRONG_PASSWD;

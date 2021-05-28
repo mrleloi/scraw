@@ -63,13 +63,13 @@ class RequestFacebookHelper
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($ch, CURLOPT_TIMEOUT, 100);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        if ($cookiePath) {
-            curl_setopt($ch, CURLOPT_COOKIEFILE, $cookiePath);
-        } else {
+//        if ($cookiePath) {
+//            curl_setopt($ch, CURLOPT_COOKIEFILE, $cookiePath);
+//        } else {
             $username = PhoneHelper::convert($username);
             $cookiePath = "cookies/fb/".urlencode($username).".txt";
             curl_setopt($ch, CURLOPT_COOKIEJAR, $cookiePath);
-        }
+//        }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
         curl_setopt($ch, CURLOPT_REFERER, "https://m.facebook.com/home.php");
