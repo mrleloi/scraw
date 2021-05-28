@@ -22,7 +22,7 @@ class ManagerFacebook extends Model
             $this->pass = $attributes['pass'];
         } else {
             $this->username = 'wapcuckhung@gmail.com';
-            $this->pass = '123456@loi3';
+            $this->pass = '123456@loi4';
         }
     }
 
@@ -30,7 +30,11 @@ class ManagerFacebook extends Model
         $username = $this->username;
         $password = $this->pass;
         if (!RequestFacebookHelper::checkCookieLogin($username)) {
-            $statusLogin = RequestFacebookHelper::checkLoginStatus($username, $password);
+            $ch = curl_init();
+            $cookies = [];
+            $html = false;
+            $userAgent = Session::get(Helper::$USER_AGENT_DATA);
+            $statusLogin = RequestFacebookHelper::checkLoginStatus($username, $password, $ch, $html, $cookies, $userAgent, $proxy);
             switch ($statusLogin)
             {
                 case Helper::$LOGIN_SUCCESS:

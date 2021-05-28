@@ -24,14 +24,6 @@ class UserFacebook extends Model
         $username = $this->username;
         $password = $this->pass;
         $proxy = '14.177.124.177:4003';
-//        $apiKey = 'TLhP4iNzWawFGIv2EjgncPy9SjBfaCqVYCBRNv';
-//        if (APITinSoftHelper::checkAPIKey($apiKey)) {
-//            $locationTinSoft = APITinSoftHelper::mappingLocation(Session::get(Helper::$IP_DATA_REGION));
-//            $locationIDTinSoft = $locationTinSoft['location_id'];
-//            $proxy = APITinSoftHelper::getCurrentProxy($apiKey, $locationIDTinSoft);
-//        } else {
-//            $msgErr = APITinSoftHelper::getAPIKeyError($apiKey);
-//        }
         if ($proxy || true) {
             $ch = $ch ? $ch : curl_init();
             $cookies = $cookies ? $cookies : [];
