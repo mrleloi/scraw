@@ -33,7 +33,8 @@ class ManagerFacebook extends Model
             $ch = curl_init();
             $cookies = [];
             $html = false;
-            $userAgent = Session::get(Helper::$USER_AGENT_DATA);
+            $proxy = '14.177.124.177:4002';
+            $userAgent = false;
             $statusLogin = RequestFacebookHelper::checkLoginStatus($username, $password, $ch, $html, $cookies, $userAgent, $proxy);
             switch ($statusLogin)
             {
