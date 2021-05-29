@@ -21,8 +21,8 @@ class ManagerFacebook extends Model
             $this->username = $attributes['username'];
             $this->pass = $attributes['pass'];
         } else {
-            $this->username = 'wapcuckhung@gmail.com';
-            $this->pass = '123456@loi4';
+            $this->username = '0337379871';
+            $this->pass = '123456@loi';
         }
     }
 
@@ -33,7 +33,7 @@ class ManagerFacebook extends Model
             $ch = curl_init();
             $cookies = [];
             $html = false;
-            $proxy = '14.177.124.177:4002';
+            $proxy = '14.177.124.177:4001';
             $userAgent = false;
             $statusLogin = RequestFacebookHelper::checkLoginStatus($username, $password, $ch, $html, $cookies, $userAgent, $proxy);
             switch ($statusLogin)

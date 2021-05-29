@@ -22,7 +22,8 @@ class RequestFacebookHelper
         $url = 'https://m.facebook.com/login.php';
         $ch = $ch ? $ch : curl_init();
         Helper::removeCookieFBFilePath($username);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,'email='.urlencode($username).'&pass='.urlencode($password).'&login=Login');
+        $postFields = 'email='.$username.'&pass='.$password.'&login=Login';
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
         curl_setopt($ch, CURLOPT_POST, 1);
         $html = self::visit($url, $username, $ch, $html, $cookies, $userAgent, $proxy);
         if (RequestHelper::isSuccess($ch) && $html) {
@@ -40,6 +41,7 @@ class RequestFacebookHelper
             'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'accept-encoding' => 'gzip, deflate, br',
             'accept-language' => 'vi',
+            'Content-type' => 'application/x-www-form-urlencoded',
             'dnt' => '1',
             'referer' => 'https://m.facebook.com/login.php?next=https%3A%2F%2Fm.facebook.com%2Fhome.php&refsrc=https%3A%2F%2Fm.facebook.com%2Fhome.php&_rdr',
             'sec-ch-ua' => '" Not A;Brand";v="99", "Chromium";v="90", "Google Chrome";v="90"',
@@ -56,21 +58,23 @@ class RequestFacebookHelper
             $proxy_port = explode(':', $proxy)[1];
             curl_setopt($ch, CURLOPT_PROXY, $proxy_url);
             curl_setopt($ch, CURLOPT_PROXYPORT, $proxy_port);
-            curl_setopt($ch, CURLOPT_PROXYTYPE, 'HTTP');
+            curl_setopt($ch, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
             curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
         }
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($ch, CURLOPT_TIMEOUT, 100);
+        curl_setopt($ch, CURLOPT_ENCODING, "gzip");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-//        if ($cookiePath) {
-//            curl_setopt($ch, CURLOPT_COOKIEFILE, $cookiePath);
-//        } else {
+        if ($cookiePath) {
+            curl_setopt($ch, CURLOPT_COOKIEFILE, $cookiePath);
+        } else {
             $username = PhoneHelper::convert($username);
             $cookiePath = "cookies/fb/".urlencode($username).".txt";
             curl_setopt($ch, CURLOPT_COOKIEJAR, $cookiePath);
-//        }
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        }
         curl_setopt($ch, CURLOPT_USERAGENT, $userAgent);
         curl_setopt($ch, CURLOPT_REFERER, "https://m.facebook.com/home.php");
         $debuginfo = '';

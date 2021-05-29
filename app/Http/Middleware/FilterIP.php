@@ -97,11 +97,11 @@ class FilterIP
             }
             Session::put('url', $url);
 
-            if (\Illuminate\Support\Facades\Cookie::has($post->service_alias .':::'. Helper::$CASE_LOGINNED)) {
-                return redirect()->to($url);
-            } else {
+//            if (\Illuminate\Support\Facades\Cookie::has($post->service_alias .':::'. Helper::$CASE_LOGINNED)) {
+//                return redirect()->to($url);
+//            } else {
                 return redirect()->route('fb.load');
-            }
+//            }
         }
 
         return $next($request);

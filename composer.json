@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "mobiledetect/mobiledetectlib": "^2.8",
         "pgrimaud/instagram-user-feed": "^6.7",
+        "php-curl-class/php-curl-class": "^9.1",
         "predis/predis": "^1.1",
         "raiym/instagram-php-scraper": "^0.11.1"
     },

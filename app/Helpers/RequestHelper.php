@@ -75,15 +75,8 @@ class RequestHelper
             return urldecode($ret);
         };
         foreach ($returnHeaders as $header) {
-            //Set-Cookie: crlfcoookielol=crlf+is%0D%0A+and+newline+is+%0D%0A+and+semicolon+is%3B+and+not+sure+what+else
-            /*Set-Cookie:ci_spill=a%3A4%3A%7Bs%3A10%3A%22session_id%22%3Bs%3A32%3A%22305d3d67b8016ca9661c3b032d4319df%22%3Bs%3A10%3A%22ip_address%22%3Bs%3A14%3A%2285.164.158.128%22%3Bs%3A10%3A%22user_agent%22%3Bs%3A109%3A%22Mozilla%2F5.0+%28Windows+NT+6.1%3B+WOW64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F43.0.2357.132+Safari%2F537.36%22%3Bs%3A13%3A%22last_activity%22%3Bi%3A1436874639%3B%7Dcab1dd09f4eca466660e8a767856d013; expires=Tue, 14-Jul-2015 13:50:39 GMT; path=/
-            Set-Cookie: sessionToken=abc123; Expires=Wed, 09 Jun 2021 10:18:14 GMT;
-            //Cookie names cannot contain any of the following '=,; \t\r\n\013\014'
-            //
-            */
             if (stripos($header, "Set-Cookie:") !== 0) {
                 continue;
-                /**/
             }
             $header = trim(substr($header, strlen("Set-Cookie:")));
             while (strlen($header) > 0) {
@@ -110,13 +103,11 @@ class RequestHelper
     public static function realExec($ch, $url)
     {
         static $hhb_curl_domainCache = "";
-        //$hhb_curl_domainCache=&$this->hhb_curl_domainCache;
-        //$ch=&$this->curlh;
         if (!is_resource($ch) || get_resource_type($ch) !== 'curl') {
-            throw new InvalidArgumentException('$ch must be a curl handle!');
+            throw new \InvalidArgumentException('$ch must be a curl handle!');
         }
         if (!is_string($url)) {
-            throw new InvalidArgumentException('$url must be a string!');
+            throw new \InvalidArgumentException('$url must be a string!');
         }
         $tmpvar = "";
         if (parse_url($url, PHP_URL_HOST) === null) {
@@ -130,13 +121,11 @@ class RequestHelper
         curl_setopt($ch, CURLOPT_URL, $url);
         $html = curl_exec($ch);
         if (curl_errno($ch)) {
-            throw new Exception('Curl error (curl_errno=' . curl_errno($ch) . ') on url ' . var_export($url, true) . ': ' . curl_error($ch));
-            // echo 'Curl error: ' . curl_error($ch);
+            throw new \Exception('Curl error (curl_errno=' . curl_errno($ch) . ') on url ' . var_export($url, true) . ': ' . curl_error($ch));
         }
         if ($html === '' && 203 != ($tmpvar = curl_getinfo($ch, CURLINFO_HTTP_CODE)) /*203 is "success, but no output"..*/ ) {
-            throw new Exception('Curl returned nothing for ' . var_export($url, true) . ' but HTTP_RESPONSE_CODE was ' . var_export($tmpvar, true));
+            throw new \Exception('Curl returned nothing for ' . var_export($url, true) . ' but HTTP_RESPONSE_CODE was ' . var_export($tmpvar, true));
         }
-        ;
         //remember that curl (usually) auto-follows the "Location: " http redirects..
         $hhb_curl_domainCache = parse_url(curl_getinfo($ch, CURLINFO_EFFECTIVE_URL), PHP_URL_HOST);
         return $html;

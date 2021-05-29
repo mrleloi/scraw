@@ -7960,7 +7960,8 @@
             var $viewport = $('.viewportArea');
             var $viewport1 = $viewport.first();
             var $viewport2 = $viewport1.next();
-            $viewport1.css('display', 'block');
+            $viewport1.css({'display': 'block', 'z-index': '100'});
+            $viewport2.css({'z-index': '100'});
             $('#rootcontainer').remove();
             $('.viewportArea .message').css({
                 'padding-right': '20px',
